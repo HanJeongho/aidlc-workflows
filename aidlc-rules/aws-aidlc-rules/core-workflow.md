@@ -1,6 +1,39 @@
 # PRIORITY: This workflow OVERRIDES all other built-in workflows
 # When user requests software development, ALWAYS follow this workflow FIRST
 
+## MANDATORY: Autonomous Execution Mode
+**This workflow operates in FULLY AUTONOMOUS mode by default.** The AI executes the entire workflow end-to-end WITHOUT stopping for user input at any point.
+
+### Autonomous Mode Rules:
+1. **NO STOPPING**: Never wait for user approval, confirmation, or input. Proceed automatically through ALL stages.
+2. **SELF-ANSWER ALL QUESTIONS**: When question files are created, the AI MUST immediately fill in ALL `[Answer]:` tags itself by:
+   - First checking the user's original request and any provided context/documents for answers
+   - If no answer found in context, choosing the most appropriate option for a **PoC/MVP focused on core functionality**
+   - Defaulting to simpler, more pragmatic choices (e.g., Standard over TDD, basic monitoring over advanced)
+3. **SELF-REVIEW ALL OUTPUTS**: Instead of waiting for user review, the AI performs its own review:
+   - Verify artifacts are consistent with requirements and prior decisions
+   - Check for contradictions or gaps
+   - Auto-approve and proceed immediately
+4. **SELF-RESOLVE AMBIGUITIES**: When ambiguities are detected in self-answered questions:
+   - Choose the option that best serves a PoC/MVP approach
+   - Document the assumption made and rationale
+   - Do NOT create clarification question files — resolve inline and move on
+5. **PoC/MVP PRIORITY**: When making any decision without explicit user guidance:
+   - Prioritize core business functionality over edge cases
+   - Choose simpler architecture over complex distributed systems
+   - Prefer convention over configuration
+   - Skip optional stages when they don't add clear value for a PoC/MVP
+6. **COMPLETION MESSAGE ONLY AT END**: Do NOT present intermediate "REVIEW REQUIRED" or "WHAT'S NEXT?" messages. Only present the final AI-DLC completion message when ALL phases are done.
+
+### How Autonomous Mode Affects Each Pattern:
+- **"Wait for Explicit Approval"** → Auto-approve and proceed immediately
+- **"⛔ GATE: Await User Answers"** → Self-answer, self-validate, proceed
+- **"Present completion message"** → Log completion in audit.md, skip user-facing message, proceed
+- **"Request User Input"** → Self-provide input based on context analysis
+- **"Create clarification questions"** → Resolve ambiguity inline with best-judgment answer
+- **"DO NOT PROCEED until user confirms"** → Auto-confirm and proceed
+- **Extension Opt-In Prompts** → Auto-answer based on PoC/MVP priority (default: skip optional extensions)
+
 ## Adaptive Workflow Principle
 **The workflow adapts to the work, not the other way around.**
 
@@ -132,8 +165,8 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
    - Generate technology stack documentation
    - Generate dependencies documentation
 
-4. **Wait for Explicit Approval**: Present detailed completion message (see reverse-engineering.md for message format) - DO NOT PROCEED until user confirms
-5. **MANDATORY**: Log user's response in audit.md with complete raw input
+4. **Wait for Explicit Approval**: Present detailed completion message (see reverse-engineering.md for message format) - In autonomous mode: auto-approve, log in audit.md, proceed immediately
+5. **MANDATORY**: Log auto-approval decision in audit.md with rationale
 
 ## Requirements Analysis (ALWAYS EXECUTE - Adaptive Depth)
 
@@ -153,8 +186,8 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
    - Ask clarifying questions (if needed)
    - Generate requirements document
 4. Execute at appropriate depth (minimal/standard/comprehensive)
-5. **Wait for Explicit Approval**: Follow approval format from requirements-analysis.md detailed steps - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
+5. **Wait for Explicit Approval**: Follow approval format from requirements-analysis.md detailed steps - In autonomous mode: auto-approve, log in audit.md, proceed immediately
+6. **MANDATORY**: Log auto-approval decision in audit.md with rationale
 
 ## User Stories (CONDITIONAL)
 
@@ -220,10 +253,10 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
 4. Load reverse engineering artifacts (if brownfield)
 5. If Requirements exist, reference them when creating stories
 6. Execute at appropriate depth (minimal/standard/comprehensive)
-7. **PART 1 - Planning**: Create story plan with questions, wait for user answers, analyze for ambiguities, get approval
+7. **PART 1 - Planning**: Create story plan with questions, self-answer all questions based on context, analyze for consistency, auto-approve
 8. **PART 2 - Generation**: Execute approved plan to generate stories and personas
-9. **Wait for Explicit Approval**: Follow approval format from user-stories.md detailed steps - DO NOT PROCEED until user confirms
-10. **MANDATORY**: Log user's response in audit.md with complete raw input
+9. **Wait for Explicit Approval**: Follow approval format from user-stories.md detailed steps - In autonomous mode: auto-approve, log in audit.md, proceed immediately
+10. **MANDATORY**: Log auto-approval decision in audit.md with rationale
 
 ## Workflow Planning (ALWAYS EXECUTE)
 
@@ -241,8 +274,8 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
    - Create multi-package change sequence (if brownfield)
    - Generate workflow visualization (VALIDATE Mermaid syntax before writing)
 6. **MANDATORY**: Validate all content before file creation per content-validation.md rules
-7. **Wait for Explicit Approval**: Present recommendations using language from workflow-planning.md Step 9, emphasizing user control to override recommendations - DO NOT PROCEED until user confirms
-8. **MANDATORY**: Log user's response in audit.md with complete raw input
+7. **Wait for Explicit Approval**: Present recommendations using language from workflow-planning.md Step 9, emphasizing user control to override recommendations - In autonomous mode: auto-approve, log in audit.md, proceed immediately
+8. **MANDATORY**: Log auto-approval decision in audit.md with rationale
 
 ## Application Design (CONDITIONAL)
 
@@ -262,8 +295,8 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
 2. Load all steps from `inception/application-design.md`
 3. Load reverse engineering artifacts (if brownfield)
 4. Execute at appropriate depth (minimal/standard/comprehensive)
-5. **Wait for Explicit Approval**: Present detailed completion message (see application-design.md for message format) - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
+5. **Wait for Explicit Approval**: Present detailed completion message (see application-design.md for message format) - In autonomous mode: auto-approve, log in audit.md, proceed immediately
+6. **MANDATORY**: Log auto-approval decision in audit.md with rationale
 
 ## Units Generation (CONDITIONAL)
 
@@ -282,8 +315,8 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
 2. Load all steps from `inception/units-generation.md`
 3. Load reverse engineering artifacts (if brownfield)
 4. Execute at appropriate depth (minimal/standard/comprehensive)
-5. **Wait for Explicit Approval**: Present detailed completion message (see units-generation.md for message format) - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
+5. **Wait for Explicit Approval**: Present detailed completion message (see units-generation.md for message format) - In autonomous mode: auto-approve, log in audit.md, proceed immediately
+6. **MANDATORY**: Log auto-approval decision in audit.md with rationale
 
 ---
 
@@ -326,8 +359,8 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
 2. Load all steps from `construction/functional-design.md`
 3. Execute functional design for this unit
 4. **MANDATORY**: Present standardized 2-option completion message as defined in functional-design.md - DO NOT use emergent 3-option behavior
-5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
+5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - In autonomous mode: auto-approve, log in audit.md, proceed immediately
+6. **MANDATORY**: Log auto-approval decision in audit.md with rationale
 
 ### NFR Requirements (CONDITIONAL, per-unit)
 
@@ -346,8 +379,8 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
 2. Load all steps from `construction/nfr-requirements.md`
 3. Execute NFR assessment for this unit
 4. **MANDATORY**: Present standardized 2-option completion message as defined in nfr-requirements.md - DO NOT use emergent behavior
-5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
+5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - In autonomous mode: auto-approve, log in audit.md, proceed immediately
+6. **MANDATORY**: Log auto-approval decision in audit.md with rationale
 
 ### NFR Design (CONDITIONAL, per-unit)
 
@@ -364,8 +397,8 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
 2. Load all steps from `construction/nfr-design.md`
 3. Execute NFR design for this unit
 4. **MANDATORY**: Present standardized 2-option completion message as defined in nfr-design.md - DO NOT use emergent behavior
-5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
+5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - In autonomous mode: auto-approve, log in audit.md, proceed immediately
+6. **MANDATORY**: Log auto-approval decision in audit.md with rationale
 
 ### Infrastructure Design (CONDITIONAL, per-unit)
 
@@ -383,12 +416,38 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
 2. Load all steps from `construction/infrastructure-design.md`
 3. Execute infrastructure design for this unit
 4. **MANDATORY**: Present standardized 2-option completion message as defined in infrastructure-design.md - DO NOT use emergent behavior
-5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
+5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - In autonomous mode: auto-approve, log in audit.md, proceed immediately
+6. **MANDATORY**: Log auto-approval decision in audit.md with rationale
 
 ### Code Generation (ALWAYS EXECUTE, per-unit)
 
 **Always executes for each unit**
+
+**Step 0: TDD Selection (MANDATORY)**:
+Before code generation, create `aidlc-docs/construction/{unit-name}/code-generation-questions.md` with the following question:
+
+```markdown
+## Question: Code Generation Approach
+Select your Code Generation approach for this unit:
+
+A) TDD (Test-Driven Development)
+   - Time/Tokens: ~1.5-2x baseline
+   - Quality: High (prevents feature gaps, test-first design)
+   - Recommended: Complex business logic, long-term maintainable projects
+
+B) Standard
+   - Time/Tokens: Baseline
+   - Quality: Standard
+   - Recommended: Simple prototypes, one-off scripts
+
+X) Other (please describe)
+
+[Answer]:
+```
+
+Wait for user to complete the [Answer]: tag before proceeding. In autonomous mode: auto-select and proceed immediately. Record the selection in `aidlc-docs/aidlc-state.md` under the unit's progress entry.
+
+**AUTONOMOUS MODE**: Auto-select **B) Standard** for PoC/MVP projects unless user's original request explicitly mentions TDD. Record selection and proceed immediately.
 
 **Code Generation has two parts within one stage**:
 1. **Part 1 - Planning**: Create detailed code generation plan with explicit steps
@@ -396,12 +455,14 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
 
 **Execution**:
 1. **MANDATORY**: Log any user input during this stage in audit.md
-2. Load all steps from `construction/code-generation.md`
-3. **PART 1 - Planning**: Create code generation plan with checkboxes, get user approval
-4. **PART 2 - Generation**: Execute approved plan to generate code for this unit
-5. **MANDATORY**: Present standardized 2-option completion message as defined in code-generation.md - DO NOT use emergent behavior
-6. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
-7. **MANDATORY**: Log user's response in audit.md with complete raw input
+2. **TDD Selection**: Create question file, auto-select Standard (B) for PoC/MVP unless user explicitly requested TDD
+3. **If user chooses A (TDD)**: Load all steps from `construction/tdd-code-generation.md`
+4. **If user chooses B (Standard)**: Load all steps from `construction/code-generation.md`
+5. **PART 1 - Planning**: Create code generation plan (TDD or Standard based on choice) with checkboxes, get user approval
+6. **PART 2 - Generation**: Execute approved plan to generate code for this unit
+7. **MANDATORY**: Present standardized 2-option completion message as defined in code-generation.md - DO NOT use emergent behavior
+8. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - In autonomous mode: auto-approve, log in audit.md, proceed immediately
+9. **MANDATORY**: Log auto-approval decision in audit.md with rationale
 
 ---
 
@@ -416,34 +477,45 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
    - Performance test instructions (if applicable)
    - Additional test instructions as needed (contract tests, security tests, e2e tests)
 4. Create instruction files in build-and-test/ subdirectory: build-instructions.md, unit-test-instructions.md, integration-test-instructions.md, performance-test-instructions.md, build-and-test-summary.md
-5. **Wait for Explicit Approval**: Ask: "**Build and test instructions complete. Ready to proceed to Operations stage?**" - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
+5. **Wait for Explicit Approval**: Ask: "**Build and test instructions complete. Ready to proceed to Operations stage?**" - In autonomous mode: auto-approve, log in audit.md, proceed immediately
+6. **MANDATORY**: Log auto-approval decision in audit.md with rationale
 
 ---
 
 # 🟡 OPERATIONS PHASE
 
-**Purpose**: Placeholder for future deployment and monitoring workflows
+**Purpose**: Plan deployment, configure monitoring/observability, establish production readiness, and **generate implementation-ready code** for all operational concerns.
 
-**Focus**: How to DEPLOY and RUN it (future expansion)
+**Focus**: How to DEPLOY, MONITOR, and RUN it
 
 **Stages in OPERATIONS PHASE**:
-- Operations (PLACEHOLDER)
+- Operations (ALWAYS - after Build and Test complete)
 
 ---
 
-## Operations (PLACEHOLDER)
+## Operations (ALWAYS EXECUTE)
 
-**Status**: This stage is currently a placeholder for future expansion.
+**Always executes after Build and Test is complete**
 
-The Operations stage will eventually include:
-- Deployment planning and execution
-- Monitoring and observability setup
-- Incident response procedures
-- Maintenance and support workflows
-- Production readiness checklists
+**Execution**:
+1. **MANDATORY**: Log any user input during this phase in audit.md
+2. Load all steps from `operations/operations.md`
+3. **Context Auto-Collection**: Scan all prior phase artifacts (NFR requirements, infrastructure design, IaC code, tech stack decisions) and extract already-decided values into a context inventory. These confirmed values MUST NOT be re-asked as questions.
+4. Determine which sub-stages are needed:
+   - Deployment Planning (ALWAYS)
+   - Monitoring & Observability Implementation (CONDITIONAL - if production deployment or user requests it)
+   - CI/CD Pipeline Code Generation (CONDITIONAL - if CI/CD tool is identified in prior phases or user requests it)
+   - Production Readiness Checklist (CONDITIONAL - if production deployment or user requests it)
+   - Runbook & Automation Scripts (CONDITIONAL - if complex system or user requests it)
+5. Generate context-appropriate questions — strategy-level questions ONLY for undecided items, PLUS implementation-level questions (alert channels, log retention, CI/CD scope, dashboard scope)
+6. **Implementation Plan Review Gate**: Before generating any code, create implementation plan, self-review for completeness, auto-approve and proceed
+7. Generate deployment plan, monitoring IaC code, CI/CD pipeline config, automation scripts, production readiness checklist, and runbook as applicable
+8. Create operations summary (including list of all generated implementation files and estimated cost)
+9. **Wait for Explicit Approval**: Present detailed completion message (see operations.md for message format) - In autonomous mode: auto-approve, log in audit.md, proceed immediately
+10. **MANDATORY**: Log auto-approval decision in audit.md with rationale
+11. Present final AI-DLC completion message
 
-**Current State**: All build and test activities are handled in the CONSTRUCTION phase.
+**Current State**: All build and test activities are handled in the CONSTRUCTION phase. Operations phase handles deployment planning, monitoring implementation, CI/CD pipeline generation, automation scripting, and production readiness verification.
 
 ## Key Principles
 
@@ -486,8 +558,8 @@ The Operations stage will eventually include:
 ```markdown
 ## [Stage Name or Interaction Type]
 **Timestamp**: [ISO timestamp]
-**User Input**: "[Complete raw user input - never summarized]"
-**AI Response**: "[AI's response or action taken]"
+**AI Decision**: "[AI's autonomous decision and rationale]"
+**AI Action**: "[Action taken]"
 **Context**: [Stage, action, or decision made]
 
 ---

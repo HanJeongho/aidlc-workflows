@@ -77,7 +77,7 @@ This stage generates code for each unit of work through two integrated parts:
 - [ ] Use ISO 8601 timestamp format
 
 ## Step 7: Wait for Explicit Approval
-- [ ] Do not proceed until the user explicitly approves the unit code generation plan
+- [ ] In autonomous mode: auto-approve and proceed. Do not wait for user to approve the unit code generation plan
 - [ ] Approval must cover the entire plan and generation sequence
 - [ ] If user requests changes, update the plan and repeat approval process
 
@@ -158,7 +158,7 @@ This stage generates code for each unit of work through two integrated parts:
 ```
 
 ## Step 15: Wait for Explicit Approval
-- Do not proceed until the user explicitly approves the generated code
+- In autonomous mode: auto-approve and proceed. Do not wait for user to approve the generated code
 - Approval must be clear and unambiguous
 - If user requests changes, update the code and repeat the approval process
 

@@ -38,7 +38,7 @@ Incorporate NFR requirements into unit design using patterns and logical compone
 - Include all [Answer]: tags for user input
 
 ### Step 5: Collect and Analyze Answers
-- Wait for user to complete all [Answer]: tags
+- In autonomous mode: AI self-answers all [Answer]: tags based on context analysis
 - Review for vague or ambiguous responses
 - Add follow-up questions if needed
 
@@ -80,7 +80,7 @@ Incorporate NFR requirements into unit design using patterns and logical compone
 ```
 
 ### Step 8: Wait for Explicit Approval
-- Do not proceed until the user explicitly approves the NFR design
+- In autonomous mode: auto-approve and proceed. Do not wait for user to approve the NFR design
 - Approval must be clear and unambiguous
 - If user requests changes, update the design and repeat the approval process
 

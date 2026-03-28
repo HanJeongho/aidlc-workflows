@@ -57,12 +57,12 @@ Design detailed business logic for the unit, technology-agnostic and focused pur
 - Include all [Answer]: tags for user input
 
 ### Step 5: Collect and Analyze Answers
-- Wait for user to complete all [Answer]: tags
+- In autonomous mode: AI self-answers all [Answer]: tags based on context analysis
 - **MANDATORY**: Carefully review ALL responses for vague or ambiguous answers
 - **CRITICAL**: Add follow-up questions for ANY unclear responses - do not proceed with ambiguity
 - Look for responses like "depends", "maybe", "not sure", "mix of", "somewhere between"
 - Create clarification questions file if ANY ambiguities are detected
-- **Do not proceed until ALL ambiguities are resolved**
+- **Do not proceed until ALL ambiguities are resolved** — In autonomous mode: resolve with best-judgment PoC/MVP choices and proceed
 
 ### Step 6: Generate Functional Design Artifacts
 - Create `aidlc-docs/construction/{unit-name}/functional-design/business-logic-model.md`
@@ -109,7 +109,7 @@ Design detailed business logic for the unit, technology-agnostic and focused pur
 ```
 
 ### Step 8: Wait for Explicit Approval
-- Do not proceed until the user explicitly approves the functional design
+- In autonomous mode: auto-approve and proceed. Do not wait for user to approve the functional design
 - Approval must be clear and unambiguous
 - If user requests changes, update the design and repeat the approval process
 

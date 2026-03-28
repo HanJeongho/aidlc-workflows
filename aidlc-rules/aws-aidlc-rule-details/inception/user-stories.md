@@ -168,15 +168,15 @@ For medium priority cases, execute user stories if ANY of these apply:
 - Ensure plan is comprehensive and covers all story development aspects
 
 ## Step 7: Request User Input
-- Ask user to fill in all [Answer]: tags directly in the story plan document
+- In autonomous mode: AI fills all [Answer]: tags in the story plan document
 - Emphasize importance of audit trail and decision documentation
 - Provide clear instructions on how to fill in the [Answer]: tags
 - Explain that all questions must be answered before proceeding
 
 ## Step 8: Collect Answers
-- Wait for user to provide answers to all questions using [Answer]: tags in the document
-- Do not proceed until ALL [Answer]: tags are completed
-- Review the document to ensure no [Answer]: tags are left blank
+- In autonomous mode: AI self-answers all [Answer]: tags based on context analysis
+- In autonomous mode: AI completes all [Answer]: tags based on context analysis
+- Verify all [Answer]: tags are filled with context-appropriate answers
 
 ## Step 9: ANALYZE ANSWERS (MANDATORY)
 Before proceeding, you MUST carefully review all user answers for:
@@ -191,7 +191,7 @@ Before proceeding, you MUST carefully review all user answers for:
 ## Step 10: MANDATORY Follow-up Questions
 If the analysis in step 9 reveals ANY ambiguous answers, you MUST:
 - Create a separate clarification questions file using [Answer]: tags
-- DO NOT proceed to approval until ALL ambiguities are completely resolved
+- In autonomous mode: resolve ambiguities with best-judgment choices and proceed
 - **CRITICAL**: Be thorough - ask follow-up questions for every unclear response
 - Examples of required follow-ups:
   - "You mentioned 'mix of A and B' - what specific criteria should determine when to use A vs B?"
@@ -214,7 +214,7 @@ If the analysis in step 9 reveals ANY ambiguous answers, you MUST:
 - Use ISO 8601 timestamp format
 
 ## Step 13: Wait for Explicit Approval of Plan
-- Do not proceed until the user explicitly approves the story approach
+- In autonomous mode: auto-approve and proceed. Do not wait for user to approve the story approach
 - Approval must be clear and unambiguous
 - If user requests changes, update the plan and repeat the approval process
 
@@ -287,7 +287,7 @@ If the analysis in step 9 reveals ANY ambiguous answers, you MUST:
 ```
 
 ## Step 21: Wait for Explicit Approval of Generated Stories
-- Do not proceed until the user explicitly approves the generated stories
+- In autonomous mode: auto-approve and proceed. Do not wait for user to approve the generated stories
 - Approval must be clear and unambiguous
 - If user requests changes, update stories and repeat the approval process
 

@@ -94,7 +94,12 @@ Analyze whatever the user has provided:
 
 **MANDATORY**: Scan all loaded `*.opt-in.md` files (loaded at workflow start from `extensions/` subdirectories) for an `## Opt-In Prompt` section. For each extension that declares one, include that question in the clarifying questions file created in Step 6.
 
-After receiving answers:
+**AUTONOMOUS MODE**: Auto-answer extension opt-in questions based on PoC/MVP priority:
+- Security Baseline → **B) No** for PoC/prototypes, **A) Yes** if user's request mentions production/security
+- Property-Based Testing → **C) No** for simple projects, **A) Yes** if user mentions complex business logic
+- Document the auto-answer rationale in audit.md
+
+After receiving answers (or auto-answering):
 1. Record each extension's enablement status in `aidlc-docs/aidlc-state.md` under `## Extension Configuration`:
 
 ```markdown
@@ -115,13 +120,12 @@ After receiving answers:
      - Label the options as A, B, C, D etc.
      - Ensure options are mutually exclusive and don't overlap
      - ALWAYS include option for custom response: "X) Other (please describe after [Answer]: tag below)"
-   - Wait for user answers in the document
+   - In autonomous mode: AI self-answers based on context
    - **MANDATORY**: Analyze ALL answers for ambiguities and create follow-up questions if needed
-   - **MANDATORY**: Keep asking questions until ALL ambiguities are resolved OR user explicitly asks to proceed
+   - **MANDATORY**: In autonomous mode, resolve ambiguities with best-judgment PoC/MVP choices and proceed
 
-### ⛔ GATE: Await User Answers
-DO NOT proceed to Step 7 until all questions in requirement-verification-questions.md are answered and validated.
-Present the question file to the user and STOP.
+### ⛔ GATE: Autonomous Self-Answer
+In autonomous mode: AI fills ALL `[Answer]:` tags based on user's original request, provided context, and PoC/MVP best practices. Self-validate for consistency, then proceed to Step 7 immediately.
 
 ### Step 7: Generate Requirements Document
    - **PREREQUISITE**: Step 6 gate must be passed — all answers received and analyzed
@@ -185,6 +189,6 @@ Update `aidlc-docs/aidlc-state.md`:
 
 **Note**: Include the "Add User Stories" option only when User Stories stage will be skipped. Replace [User Stories/Workflow Planning] with the actual next stage name.
 
-   - Wait for explicit user approval before proceeding
+   - In autonomous mode: auto-approve and proceed immediately
    - Record approval response with timestamp
    - Update Requirements Analysis stage complete in aidlc-state.md

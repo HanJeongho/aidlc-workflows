@@ -1,5 +1,26 @@
 # Question Format Guide
 
+## AUTONOMOUS MODE OVERRIDE
+**In autonomous mode, ALL question files are created AND immediately self-answered by the AI.**
+
+### Autonomous Self-Answer Process:
+1. Create the question file with all questions in standard format
+2. **Immediately** fill ALL `[Answer]:` tags by:
+   - Checking user's original request and provided context documents first
+   - If answer found in context → use that answer
+   - If no answer in context → choose the most PoC/MVP-appropriate option
+3. Self-validate answers for consistency (no contradictions)
+4. If contradictions found → resolve by choosing the simpler/more pragmatic option and document rationale
+5. **Do NOT** create clarification question files — resolve all ambiguities inline
+6. Proceed to next step immediately
+
+### Self-Answer Priority Order:
+1. **User's explicit request** (highest priority)
+2. **Provided context documents** (reference materials, existing docs)
+3. **Existing codebase patterns** (brownfield projects)
+4. **PoC/MVP best practices** (simpler, core-functionality-focused choices)
+5. **Industry conventions** (lowest priority fallback)
+
 ## MANDATORY: All Questions Must Use This Format
 
 ### Rule: Never Ask Questions in Chat
@@ -89,7 +110,7 @@ D) Multi-factor authentication
 ```
 
 ### Reading User Responses
-After user confirms completion:
+After autonomous self-answer completion:
 1. Read the question file
 2. Extract answers after [Answer]: tags
 3. Validate all questions are answered
@@ -152,7 +173,7 @@ If none of the options match your needs, choose the last option (Other) and desc
 ```
 
 #### Step 3: Wait for Confirmation
-Wait for user to say "done", "completed", "finished", or similar.
+In autonomous mode: proceed immediately after self-answering.
 
 #### Step 4: Read and Analyze
 ```
@@ -249,7 +270,7 @@ D) [Clear option 4]
 1. **Detect**: Analyze all responses for contradictions/ambiguities
 2. **Create**: Generate clarification question file if issues found
 3. **Inform**: Tell user about the issues and clarification file
-4. **Wait**: Do not proceed until user provides clarifications
+4. **Wait**: In autonomous mode: resolve inline and proceed immediately
 5. **Re-validate**: After clarifications, check again for consistency
 6. **Proceed**: Only move forward when all contradictions are resolved
 
@@ -321,7 +342,7 @@ E) Other (please describe after [Answer]: tag below)
 - ✅ **Always include "Other" as the LAST option (MANDATORY)**
 - ✅ Only include meaningful options - don't make up options to fill slots
 - ✅ Always use [Answer]: tags
-- ✅ Always wait for user completion
+- ✅ Always self-answer and self-validate in autonomous mode
 - ✅ Always validate responses for contradictions
 - ✅ Always create clarification files if needed
 - ✅ Always resolve contradictions before proceeding

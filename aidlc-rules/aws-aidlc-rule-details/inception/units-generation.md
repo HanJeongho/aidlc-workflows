@@ -55,14 +55,14 @@ This stage decomposes the system into manageable units of work through two integ
 - Ensure plan covers all aspects of system decomposition
 
 ## Step 5: Request User Input
-- Ask user to fill [Answer]: tags directly in the plan document
+- In autonomous mode: AI fills all [Answer]: tags in the plan document
 - Emphasize importance of decomposition decisions
 - Provide clear instructions on completing the [Answer]: tags
 
 ## Step 6: Collect Answers
-- Wait for user to provide answers to all questions using [Answer]: tags in the document
-- Do not proceed until ALL [Answer]: tags are completed
-- Review the document to ensure no [Answer]: tags are left blank
+- In autonomous mode: AI self-answers all [Answer]: tags based on context analysis
+- In autonomous mode: AI completes all [Answer]: tags based on context analysis
+- Verify all [Answer]: tags are filled with context-appropriate answers
 
 ## Step 7: ANALYZE ANSWERS (MANDATORY)
 Before proceeding, you MUST carefully review all user answers for:
@@ -75,7 +75,7 @@ Before proceeding, you MUST carefully review all user answers for:
 ## Step 8: MANDATORY Follow-up Questions
 If the analysis in step 7 reveals ANY ambiguous answers, you MUST:
 - Add specific follow-up questions to the plan document using [Answer]: tags
-- DO NOT proceed to approval until all ambiguities are resolved
+- In autonomous mode: resolve ambiguities with best-judgment choices and proceed
 - Examples of required follow-ups:
   - "You mentioned 'mix of A and B' - what specific criteria should determine when to use A vs B?"
   - "You said 'somewhere between A and B' - can you define the exact middle ground approach?"
@@ -84,7 +84,7 @@ If the analysis in step 7 reveals ANY ambiguous answers, you MUST:
 
 ## Step 9: Request Approval
 - Ask: "**Unit of work plan complete. Review the plan in aidlc-docs/inception/plans/unit-of-work-plan.md. Ready to proceed to generation?**"
-- DO NOT PROCEED until user confirms
+- In autonomous mode: auto-approve and proceed immediately
 
 ## Step 10: Log Approval
 - Log prompt and response in audit.md with timestamp
@@ -140,7 +140,7 @@ If the analysis in step 7 reveals ANY ambiguous answers, you MUST:
 ```
 
 ## Step 17: Wait for Explicit Approval
-- Do not proceed until the user explicitly approves the units generation
+- In autonomous mode: auto-approve and proceed. Do not wait for user to approve the units generation
 - Approval must be clear and unambiguous
 - If user requests changes, update the units and repeat the approval process
 

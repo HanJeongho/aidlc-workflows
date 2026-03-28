@@ -21,6 +21,8 @@ B) Review a previous stage ([Show available stages])
 [Answer]: 
 ```
 
+**AUTONOMOUS MODE**: Auto-select A) and continue immediately without waiting.
+
 ## MANDATORY: Session Continuity Instructions
 1. **Always read aidlc-state.md first** when detecting existing project
 2. **Parse current status** from the workflow file to populate the prompt
