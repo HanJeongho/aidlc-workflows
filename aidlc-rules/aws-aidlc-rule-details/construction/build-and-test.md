@@ -9,10 +9,30 @@
 
 ---
 
+## Step 0: Detect TDD Artifacts (MANDATORY)
+
+**Check for TDD artifacts** in `aidlc-docs/construction/plans/`:
+- Look for `{unit-name}-test-plan.md` files
+- Look for `{unit-name}-contracts.md` files
+
+**If TDD artifacts found**:
+- TDD was used for code generation
+- Unit tests already executed and passed (🟢 status in test-plan.md)
+- Load test results from `{unit-name}-test-plan.md`
+- Skip re-running unit tests that are already 🟢 Passed
+- Focus on integration tests and other test types
+
+**If NO TDD artifacts found**:
+- Standard code generation was used
+- Proceed with full test execution
+
+---
+
 ## Step 1: Analyze Testing Requirements
 
 Analyze the project to determine appropriate testing strategy:
 - **Unit tests**: Already generated per unit during code generation
+  - **If TDD**: Already executed and passed - verify only
 - **Integration tests**: Test interactions between units/services
 - **Performance tests**: Load, stress, and scalability testing
 - **End-to-end tests**: Complete user workflows
@@ -74,6 +94,14 @@ Create `aidlc-docs/construction/build-and-test/build-instructions.md`:
 
 ## Step 3: Generate Unit Test Execution Instructions
 
+**If TDD was used** (test-plan.md exists):
+- Unit tests already executed during Code Generation
+- All tests should be 🟢 Passed in `{unit-name}-test-plan.md`
+- Run verification only to confirm tests still pass after any final changes
+
+**If Standard code generation was used**:
+- Execute full unit test suite
+
 Create `aidlc-docs/construction/build-and-test/unit-test-instructions.md`:
 
 ```markdown
@@ -102,7 +130,47 @@ If tests fail:
 
 ---
 
-## Step 4: Generate Integration Test Instructions
+## Step 4: Integration Verification (MANDATORY - after per-unit build/test)
+
+**Purpose**: Verify all units integrate correctly before running integration tests.
+
+- [ ] Verify all unit code exists in workspace (check each unit's expected output paths)
+- [ ] Check cross-unit dependency conflicts (version mismatches, interface incompatibilities)
+- [ ] Execute full project integrated build (all units together)
+- [ ] Generate `aidlc-docs/construction/build-and-test/integration-state.md`:
+
+```markdown
+# Integration State
+
+## Unit Summary
+| Unit | Code Gen Approach | Stages Executed | Build Status | Unit Tests |
+|------|------------------|-----------------|--------------|------------|
+| [unit-a] | [TDD/Standard] | [FD, NFR, CG] | [Pass/Fail] | [X passed, Y failed] |
+| [unit-b] | [TDD/Standard] | [CG only] | [Pass/Fail] | [X passed, Y failed] |
+
+## Cross-Unit Dependencies
+| Dependency | Provider Unit | Consumer Unit | Status |
+|-----------|--------------|---------------|--------|
+| [API/Interface] | [unit-a] | [unit-b] | [Compatible/Conflict] |
+
+## Integrated Build
+- **Status**: [Pass/Fail]
+- **Conflicts Found**: [List any conflicts]
+- **Resolution**: [How conflicts were resolved]
+
+## Integration Readiness
+- **All units built**: [Yes/No]
+- **All unit tests pass**: [Yes/No]
+- **No dependency conflicts**: [Yes/No]
+- **Ready for integration testing**: [Yes/No]
+```
+
+- [ ] If integration readiness is `No`: resolve issues before proceeding
+- [ ] Update `aidlc-docs/aidlc-state.md` with integration verification status
+
+---
+
+## Step 5: Generate Integration Test Instructions
 
 Create `aidlc-docs/construction/build-and-test/integration-test-instructions.md`:
 
@@ -160,7 +228,7 @@ Test interactions between units/services to ensure they work together correctly.
 
 ---
 
-## Step 5: Generate Performance Test Instructions (If Applicable)
+## Step 6: Generate Performance Test Instructions (If Applicable)
 
 Create `aidlc-docs/construction/build-and-test/performance-test-instructions.md`:
 
@@ -220,7 +288,7 @@ If performance doesn't meet requirements:
 
 ---
 
-## Step 6: Generate Additional Test Instructions (As Needed)
+## Step 7: Generate Additional Test Instructions (As Needed)
 
 Based on project requirements, generate additional test instruction files:
 
@@ -245,7 +313,7 @@ Create `aidlc-docs/construction/build-and-test/e2e-test-instructions.md`:
 
 ---
 
-## Step 7: Generate Test Summary
+## Step 8: Generate Test Summary
 
 Create `aidlc-docs/construction/build-and-test/build-and-test-summary.md`:
 
@@ -296,7 +364,7 @@ Create `aidlc-docs/construction/build-and-test/build-and-test-summary.md`:
 
 ---
 
-## Step 8: Update State Tracking
+## Step 9: Update State Tracking
 
 Update `aidlc-docs/aidlc-state.md`:
 - Mark Build and Test stage as complete
@@ -304,7 +372,7 @@ Update `aidlc-docs/aidlc-state.md`:
 
 ---
 
-## Step 9: Present Results to User
+## Step 10: Present Results to User
 
 Present comprehensive message:
 
@@ -334,7 +402,7 @@ Review the summary in aidlc-docs/construction/build-and-test/build-and-test-summ
 
 ---
 
-## Step 10: Log Interaction
+## Step 11: Log Interaction
 
 **MANDATORY**: Log the phase completion in `aidlc-docs/audit.md`:
 

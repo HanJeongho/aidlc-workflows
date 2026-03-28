@@ -390,18 +390,44 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
 
 **Always executes for each unit**
 
+**Step 0: TDD Selection (MANDATORY)**:
+Before code generation, create `aidlc-docs/construction/{unit-name}/code-generation-questions.md` with the following question:
+
+```markdown
+## Question: Code Generation Approach
+Select your Code Generation approach for this unit:
+
+A) TDD (Test-Driven Development)
+   - Time/Tokens: ~1.5-2x baseline
+   - Quality: High (prevents feature gaps, test-first design)
+   - Recommended: Complex business logic, long-term maintainable projects
+
+B) Standard
+   - Time/Tokens: Baseline
+   - Quality: Standard
+   - Recommended: Simple prototypes, one-off scripts
+
+X) Other (please describe)
+
+[Answer]:
+```
+
+Wait for user to complete the [Answer]: tag before proceeding. Record the selection in `aidlc-docs/aidlc-state.md` under the unit's progress entry.
+
 **Code Generation has two parts within one stage**:
 1. **Part 1 - Planning**: Create detailed code generation plan with explicit steps
 2. **Part 2 - Generation**: Execute approved plan to generate code, tests, and artifacts
 
 **Execution**:
 1. **MANDATORY**: Log any user input during this stage in audit.md
-2. Load all steps from `construction/code-generation.md`
-3. **PART 1 - Planning**: Create code generation plan with checkboxes, get user approval
-4. **PART 2 - Generation**: Execute approved plan to generate code for this unit
-5. **MANDATORY**: Present standardized 2-option completion message as defined in code-generation.md - DO NOT use emergent behavior
-6. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
-7. **MANDATORY**: Log user's response in audit.md with complete raw input
+2. **TDD Selection**: Create question file, wait for user response (A or B)
+3. **If user chooses A (TDD)**: Load all steps from `construction/tdd-code-generation.md`
+4. **If user chooses B (Standard)**: Load all steps from `construction/code-generation.md`
+5. **PART 1 - Planning**: Create code generation plan (TDD or Standard based on choice) with checkboxes, get user approval
+6. **PART 2 - Generation**: Execute approved plan to generate code for this unit
+7. **MANDATORY**: Present standardized 2-option completion message as defined in code-generation.md - DO NOT use emergent behavior
+8. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
+9. **MANDATORY**: Log user's response in audit.md with complete raw input
 
 ---
 
@@ -409,41 +435,58 @@ All subsequent rule detail file references (e.g., `common/process-overview.md`, 
 
 1. **MANDATORY**: Log any user input during this phase in audit.md
 2. Load all steps from `construction/build-and-test.md`
-3. Generate comprehensive build and test instructions:
-   - Build instructions for all units
-   - Unit test execution instructions
+3. Generate per-unit build and test instructions:
+   - Build instructions for each unit
+   - Unit test execution instructions (if TDD: verify only, if Standard: full execution)
+4. Execute Integration Verification:
+   - Verify all unit code exists in workspace
+   - Check cross-unit dependency conflicts
+   - Execute full project integrated build
+   - Generate `integration-state.md` summarizing all unit results (TDD selection, stage progression, build/test results per unit)
+5. Generate integration and system-level test instructions:
    - Integration test instructions (test interactions between units)
    - Performance test instructions (if applicable)
    - Additional test instructions as needed (contract tests, security tests, e2e tests)
-4. Create instruction files in build-and-test/ subdirectory: build-instructions.md, unit-test-instructions.md, integration-test-instructions.md, performance-test-instructions.md, build-and-test-summary.md
-5. **Wait for Explicit Approval**: Ask: "**Build and test instructions complete. Ready to proceed to Operations stage?**" - DO NOT PROCEED until user confirms
-6. **MANDATORY**: Log user's response in audit.md with complete raw input
+6. Create instruction files in build-and-test/ subdirectory: build-instructions.md, unit-test-instructions.md, integration-test-instructions.md, integration-state.md, performance-test-instructions.md, build-and-test-summary.md
+7. **Wait for Explicit Approval**: Ask: "**Build and test instructions complete. Ready to proceed to Operations stage?**" - DO NOT PROCEED until user confirms
+8. **MANDATORY**: Log user's response in audit.md with complete raw input
 
 ---
 
 # 🟡 OPERATIONS PHASE
 
-**Purpose**: Placeholder for future deployment and monitoring workflows
+**Purpose**: Plan deployment, configure monitoring/observability, establish production readiness, and **generate implementation-ready code** for all operational concerns.
 
-**Focus**: How to DEPLOY and RUN it (future expansion)
+**Focus**: How to DEPLOY, MONITOR, and RUN it
 
 **Stages in OPERATIONS PHASE**:
-- Operations (PLACEHOLDER)
+- Operations (ALWAYS - after Build and Test complete)
 
 ---
 
-## Operations (PLACEHOLDER)
+## Operations (ALWAYS EXECUTE)
 
-**Status**: This stage is currently a placeholder for future expansion.
+**Always executes after Build and Test is complete**
 
-The Operations stage will eventually include:
-- Deployment planning and execution
-- Monitoring and observability setup
-- Incident response procedures
-- Maintenance and support workflows
-- Production readiness checklists
+**Execution**:
+1. **MANDATORY**: Log any user input during this phase in audit.md
+2. Load all steps from `operations/operations.md`
+3. **Context Auto-Collection**: Scan all prior phase artifacts (NFR requirements, infrastructure design, IaC code, tech stack decisions) and extract already-decided values into a context inventory. These confirmed values MUST NOT be re-asked as questions.
+4. Determine which sub-stages are needed:
+   - Deployment Planning (ALWAYS)
+   - Monitoring & Observability Implementation (CONDITIONAL - if production deployment or user requests it) — generates BOTH documentation AND IaC code (e.g., Terraform monitoring.tf, sns.tf, dashboard.tf)
+   - CI/CD Pipeline Code Generation (CONDITIONAL - if CI/CD tool is identified in prior phases or user requests it) — generates actual pipeline config (e.g., .github/workflows/deploy.yml)
+   - Production Readiness Checklist (CONDITIONAL - if production deployment or user requests it)
+   - Runbook & Automation Scripts (CONDITIONAL - if complex system or user requests it) — generates BOTH runbook document AND executable scripts (e.g., scripts/ops/)
+5. Generate context-appropriate questions — strategy-level questions ONLY for undecided items, PLUS implementation-level questions (alert channels, log retention, CI/CD scope, dashboard scope)
+6. **Implementation Plan Review Gate**: Before generating any code, present a complete implementation plan (files to generate, resources to create, estimated cost impact) and wait for user approval
+7. Generate deployment plan, monitoring IaC code, CI/CD pipeline config, automation scripts, production readiness checklist, and runbook as applicable
+8. Create operations summary (including list of all generated implementation files and estimated cost)
+9. **Wait for Explicit Approval**: Present detailed completion message (see operations.md for message format) - DO NOT PROCEED until user confirms
+10. **MANDATORY**: Log user's response in audit.md with complete raw input
+11. Present final AI-DLC completion message
 
-**Current State**: All build and test activities are handled in the CONSTRUCTION phase.
+**Current State**: All build and test activities are handled in the CONSTRUCTION phase. Operations phase handles deployment planning, monitoring implementation, CI/CD pipeline generation, automation scripting, and production readiness verification.
 
 ## Key Principles
 
@@ -525,9 +568,27 @@ The Operations stage will eventually include:
 │   │   │   ├── nfr-requirements/
 │   │   │   ├── nfr-design/
 │   │   │   ├── infrastructure-design/
-│   │   │   └── code/               # Markdown summaries only
+│   │   │   ├── code/               # Markdown summaries only
+│   │   │   └── code-generation-questions.md
 │   │   └── build-and-test/
-│   ├── operations/                 # 🟡 OPERATIONS PHASE (placeholder)
+│   │       ├── build-instructions.md
+│   │       ├── unit-test-instructions.md
+│   │       ├── integration-state.md    # Per-unit summary (TDD, stages, results)
+│   │       ├── integration-test-instructions.md
+│   │       ├── performance-test-instructions.md
+│   │       └── build-and-test-summary.md
+│   ├── operations/                 # 🟡 OPERATIONS PHASE
+│   │   ├── plans/
+│   │   │   ├── context-inventory.md        # Auto-collected values from prior phases
+│   │   │   ├── operations-plan.md
+│   │   │   ├── operations-questions.md
+│   │   │   └── implementation-plan.md      # Review gate before code generation
+│   │   ├── deployment-plan.md
+│   │   ├── monitoring-setup.md
+│   │   ├── cicd-pipeline.md
+│   │   ├── production-readiness-checklist.md
+│   │   ├── runbook.md
+│   │   └── operations-summary.md
 │   ├── aidlc-state.md
 │   └── audit.md
 ```

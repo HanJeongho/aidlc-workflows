@@ -275,7 +275,7 @@ flowchart TD
     end
     
     subgraph OPERATIONS["🟡 OPERATIONS PHASE"]
-        OPS["Operations<br/><b>PLACEHOLDER</b>"]
+        OPS["Operations<br/><b>EXECUTE</b>"]
     end
     
     Start --> WD
@@ -321,8 +321,8 @@ flowchart TD
   - **Rationale**: Build, test, and verification needed
 
 ### 🟡 OPERATIONS PHASE
-- [ ] Operations - PLACEHOLDER
-  - **Rationale**: Future deployment and monitoring workflows
+- [ ] Operations - EXECUTE (ALWAYS)
+  - **Rationale**: Deployment planning, monitoring, and production readiness
 
 ## Package Change Sequence (Brownfield Only)
 [If applicable, list package update sequence with dependencies]
@@ -379,7 +379,7 @@ Update `aidlc-docs/aidlc-state.md`:
 - [ ] Build and Test - EXECUTE
 
 ### 🟡 OPERATIONS PHASE
-- [ ] Operations - PLACEHOLDER
+- [ ] Operations - EXECUTE
 
 ## Current Status
 - **Lifecycle Phase**: INCEPTION

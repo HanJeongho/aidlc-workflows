@@ -55,14 +55,14 @@
 **Outputs**: Design artifacts, NFR implementations, code, tests
 
 ### OPERATIONS PHASE
-**Purpose**: Deployment and operational readiness  
+**Purpose**: Deployment planning and operational readiness  
 **Focus**: How to DEPLOY and RUN it  
 **Location**: `operations/` directory
 
 **Stages**:
-- Operations (PLACEHOLDER)
+- Operations (ALWAYS)
 
-**Outputs**: Build instructions, deployment guides, monitoring setup, verification procedures
+**Outputs**: Deployment plans, monitoring setup, production readiness checklists, runbooks, operations summary
 
 ---
 

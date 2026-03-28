@@ -32,11 +32,15 @@ B) Review a previous stage ([Show available stages])
    - **Design (Units)**: Read unit-of-work.md, unit-of-work-dependency.md, unit-of-work-story-map.md
    - **Per-Unit Design**: Read functional-design.md, nfr-requirements.md, nfr-design.md, infrastructure-design.md
    - **Code Stages**: Read all code files, plans, AND all previous artifacts
+   - **Build and Test**: Read all unit code, test results, integration-state.md
+   - **Operations**: Read build-and-test-summary.md, integration-state.md, deployment-plan.md, monitoring-setup.md, production-readiness-checklist.md, runbook.md, operations-summary.md
 4. **Smart Context Loading by Stage**:
    - **Early Stages (Workspace Detection, Reverse Engineering)**: Load workspace analysis
    - **Requirements/Stories**: Load reverse engineering + requirements artifacts
    - **Design Stages**: Load requirements + stories + architecture + design artifacts
    - **Code Stages**: Load ALL artifacts + existing code files
+   - **Build and Test**: Load code artifacts + test results + integration-state.md
+   - **Operations**: Load build-and-test summary + integration-state.md + any existing operations artifacts
 5. **Adapt options** based on architectural choice and current phase
 6. **Show specific next steps** rather than generic descriptions
 7. **Log the continuity prompt** in audit.md with timestamp

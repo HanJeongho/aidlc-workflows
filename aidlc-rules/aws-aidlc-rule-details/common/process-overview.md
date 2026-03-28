@@ -10,14 +10,14 @@
 ## The Three-Phase Lifecycle:
 • **INCEPTION PHASE**: Planning and architecture (Workspace Detection + conditional phases + Workflow Planning)
 • **CONSTRUCTION PHASE**: Design, implementation, build and test (per-unit design + Code Generation + Build & Test)
-• **OPERATIONS PHASE**: Placeholder for future deployment and monitoring workflows
+• **OPERATIONS PHASE**: Deployment planning, monitoring configuration, and production readiness verification
 
 ## The Adaptive Workflow:
-• **Workspace Detection** (always) → **Reverse Engineering** (brownfield only) → **Requirements Analysis** (always, adaptive depth) → **Conditional Phases** (as needed) → **Workflow Planning** (always) → **Code Generation** (always, per-unit) → **Build and Test** (always)
+• **Workspace Detection** (always) → **Reverse Engineering** (brownfield only) → **Requirements Analysis** (always, adaptive depth) → **Conditional Phases** (as needed) → **Workflow Planning** (always) → **Code Generation** (always, per-unit) → **Build and Test** (always) → **Operations** (always)
 
 ## How It Works:
 • **AI analyzes** your request, workspace, and complexity to determine which stages are needed
-• **These stages always execute**: Workspace Detection, Requirements Analysis (adaptive depth), Workflow Planning, Code Generation (per-unit), Build and Test
+• **These stages always execute**: Workspace Detection, Requirements Analysis (adaptive depth), Workflow Planning, Code Generation (per-unit), Build and Test, Operations
 • **All other stages are conditional**: Reverse Engineering, User Stories, Application Design, Units Generation, per-unit design stages (Functional Design, NFR Requirements, NFR Design, Infrastructure Design)
 • **No fixed sequences**: Stages execute in the order that makes sense for your specific task
 
@@ -54,7 +54,7 @@ flowchart TD
     end
     
     subgraph OPERATIONS["🟡 OPERATIONS PHASE"]
-        OPS["Operations<br/><b>PLACEHOLDER</b>"]
+        OPS["Operations<br/><b>ALWAYS</b>"]
     end
     
     Start --> WD
@@ -81,8 +81,8 @@ flowchart TD
     ID --> CG
     CG -.->|Next Unit| FD
     CG --> BT
-    BT -.-> OPS
-    BT --> End(["Complete"])
+    BT --> OPS
+    OPS --> End(["Complete"])
     
     style WD fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
     style RA fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
@@ -90,7 +90,7 @@ flowchart TD
 
     style CG fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
     style BT fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
-    style OPS fill:#BDBDBD,stroke:#424242,stroke-width:2px,stroke-dasharray: 5 5,color:#000
+    style OPS fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
     style RE fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
     style Stories fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
     style AppDesign fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
@@ -128,14 +128,14 @@ flowchart TD
 - Code Generation: Generate code with Part 1 - Planning, Part 2 - Generation (ALWAYS, per-unit)
 - Build and Test: Build all units and execute comprehensive testing (ALWAYS)
 
-**🟡 OPERATIONS PHASE** - Placeholder
-- Operations: Placeholder for future deployment and monitoring workflows (PLACEHOLDER)
+**🟡 OPERATIONS PHASE** - Deployment, Monitoring, and Production Readiness
+- Operations: Deployment planning, monitoring setup, production readiness verification, runbook generation (ALWAYS)
 
 **Key Principles:**
 - Phases execute only when they add value
 - Each phase independently evaluated
 - INCEPTION focuses on "what" and "why"
 - CONSTRUCTION focuses on "how" plus "build and test"
-- OPERATIONS is placeholder for future expansion
+- OPERATIONS focuses on "deploy" and "run" — deployment planning, monitoring, and production readiness
 - Simple changes may skip conditional INCEPTION stages
-- Complex changes get full INCEPTION and CONSTRUCTION treatment
+- Complex changes get full INCEPTION, CONSTRUCTION, and OPERATIONS treatment

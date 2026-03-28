@@ -54,9 +54,9 @@ AI-DLC is a structured yet flexible software development process that adapts to 
                               v
         ╔═══════════════════════════════════════╗
         ║     OPERATIONS PHASE                  ║
-        ║     Placeholder for Future            ║
+        ║     Deploy and Run                    ║
         ╠═══════════════════════════════════════╣
-        ║ • Operations (PLACEHOLDER)            ║
+        ║ • Operations (ALWAYS)                 ║
         ╚═══════════════════════════════════════╝
                               |
                               v
@@ -77,10 +77,10 @@ AI-DLC is a structured yet flexible software development process that adapts to 
 - **Output**: Working code, tests, build instructions
 - **Your Role**: Review designs, approve implementation plans, validate results
 
-**OPERATIONS PHASE** - *Deployment & Monitoring (Future)*
-- **Purpose**: How to DEPLOY and RUN it
-- **Status**: Placeholder for future deployment and monitoring workflows
-- **Current State**: Build and test activities handled in CONSTRUCTION phase
+**OPERATIONS PHASE** - *Deployment & Monitoring*
+- **Purpose**: How to DEPLOY, MONITOR, and RUN it
+- **Stages**: Deployment planning, monitoring setup, production readiness, runbook generation
+- **Your Role**: Review deployment plans, approve monitoring configuration, validate production readiness
 
 ## Key Principles:
 

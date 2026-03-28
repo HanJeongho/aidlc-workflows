@@ -171,6 +171,31 @@
 - **Solution**: Ask user to specify deployment targets and methods
 - **Workaround**: Provide instructions for common platforms
 
+**Error**: Build and Test summary indicates not ready for operations
+- **Cause**: Failing tests, incomplete build, missing artifacts
+- **Solution**: Return to Build and Test stage to resolve issues
+- **Do Not Proceed**: Until Build and Test is fully complete
+
+**Error**: Infrastructure design conflicts with deployment strategy
+- **Cause**: Deployment strategy incompatible with designed infrastructure
+- **Solution**: Present conflict to user, ask which to adjust
+- **Do Not Proceed**: Until deployment strategy and infrastructure are aligned
+
+**Error**: Monitoring tool or service is unavailable or unsupported
+- **Cause**: User's environment doesn't support specified monitoring tools
+- **Solution**: Ask user for available monitoring tools, adapt setup accordingly
+- **Workaround**: Generate generic monitoring configuration, mark for manual adaptation
+
+**Error**: Production readiness checklist has unresolvable blockers
+- **Cause**: Security findings, missing approvals, infrastructure gaps
+- **Solution**: Document blockers clearly, ask user for resolution path
+- **Escalation**: May require human intervention for security reviews or approvals
+
+**Error**: Rollback procedure cannot be defined
+- **Cause**: Stateful data migrations, irreversible schema changes
+- **Solution**: Document limitations, ask user for acceptable rollback scope
+- **Workaround**: Define partial rollback with clear documentation of what cannot be rolled back
+
 ## Recovery Procedures
 
 ### Partial Phase Completion
