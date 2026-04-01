@@ -134,7 +134,7 @@ If tests fail:
 
 **Purpose**: Verify all units integrate correctly before running integration tests.
 
-- [ ] Verify all unit code exists in workspace (check each unit's expected output paths)
+- [ ] Verify all unit code exists in workspace: Load each unit's `aidlc-docs/construction/plans/{unit-name}-code-generation-plan.md` (Standard) or `{unit-name}-tdd-code-generation-plan.md` (TDD) and confirm all planned output files exist at their expected paths
 - [ ] Check cross-unit dependency conflicts (version mismatches, interface incompatibilities)
 - [ ] **For TDD units**: Load test results from `aidlc-docs/construction/plans/{unit-name}-test-plan.md` and verify all test cases are 🟢 Passed. Load contracts from `{unit-name}-contracts.md` and verify cross-unit interface compatibility against contract definitions
 - [ ] **For Standard units**: Verify unit test execution results from per-unit build step
