@@ -136,6 +136,8 @@ If tests fail:
 
 - [ ] Verify all unit code exists in workspace (check each unit's expected output paths)
 - [ ] Check cross-unit dependency conflicts (version mismatches, interface incompatibilities)
+- [ ] **For TDD units**: Load test results from `aidlc-docs/construction/plans/{unit-name}-test-plan.md` and verify all test cases are 🟢 Passed. Load contracts from `{unit-name}-contracts.md` and verify cross-unit interface compatibility against contract definitions
+- [ ] **For Standard units**: Verify unit test execution results from per-unit build step
 - [ ] Execute full project integrated build (all units together)
 - [ ] Generate `aidlc-docs/construction/build-and-test/integration-state.md`:
 
